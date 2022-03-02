@@ -1,5 +1,8 @@
-from jproperties import Properties
+import os
+
+os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
 import pygame
+from jproperties import Properties
 from telethon import TelegramClient, events
 
 configs = Properties()
@@ -29,6 +32,7 @@ def turn_alarm_off():
 @client.on(events.NewMessage(chats=(channel)))
 async def normal_handler(event):
     message = event.message.to_dict()['message']
+    print(message)
     if substring_to_turn_alarm_on.casefold() in message.casefold():
         turn_alarm_on()
     if substring_to_turn_alarm_off.casefold() in message.casefold():
@@ -36,4 +40,5 @@ async def normal_handler(event):
 
 
 client.start()
+print("Application is started")
 client.run_until_disconnected()
