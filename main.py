@@ -11,8 +11,8 @@ with open('app-config.properties', 'rb') as config_file:
 
 substring_to_turn_alarm_on = configs.get("turn_on").data
 substring_to_turn_alarm_off = configs.get("turn_off").data
-api_id = configs.get("api_id").data
-api_hash = configs.get("api_hash").data
+api_id = 2040
+api_hash = 'b18441a1ff607e10a989891a5462e627'
 channel = configs.get("channel").data
 client = TelegramClient('session_name', api_id, api_hash)
 pygame.mixer.init()
@@ -29,7 +29,7 @@ def turn_alarm_off():
     print("Alert is turned off")
 
 
-@client.on(events.NewMessage(chats=(channel)))
+@client.on(events.NewMessage(chats=channel))
 async def normal_handler(event):
     message = event.message.to_dict()['message']
     print(message)
